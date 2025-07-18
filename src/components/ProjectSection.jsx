@@ -24,12 +24,12 @@ const projects = [
   },
   {
     id: 3,
-    title: "E-commerce Platform",
+    title: "Mapty",
     description:
       "It is a workout tracking application, featuring map integration.",
     image: "/projects/project3.png",
     tags: ["JavaScript"],
-    demoUrl: "https://mapty-dusky-eight.vercel.app/",
+    demoUrl: "https://mapty-dusky-eight.vercel.app",
     githubUrl: "https://github.com/namankrbhagat/Mapty",
   },
 ];
@@ -75,7 +75,7 @@ export const ProjectSection = () =>{
               <div className="flex justify-between items-center">
                 <div className="flex space-x-3">
                   <a 
-                    href="project.demoUrl"
+                    href={project.demoUrl}
                     target="_blank"
                     className="text-foreground/80 hover:text-primary transition-colors duration-300"
                   >
