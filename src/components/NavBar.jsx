@@ -14,42 +14,66 @@ export const NavBar = () =>{
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.screenY > 10)
+      setIsScrolled(window.scrollY > 50)
     }
     
-    return () => window.addEventListener("scroll",handleScroll)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   },[])
 
   return (
-        <nav
-      className={`fixed top-8 left-60 right-60 z-40 transition-all duration-300 
-        rounded-2xl shadow-md
-        ${isScrolled ? "py-3 bg-violet-300 backdrop-blur-md" : "py-5 bg-violet-500 backdrop-blur-md"}
+    <nav
+      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out
+        ${isScrolled 
+          ? "w-[600px] py-3" 
+          : "w-[650px] py-4"
+        }
+        bg-card/20 backdrop-blur-2xl border border-white/10 rounded-2xl 
+        shadow-[0_8px_32px_0_rgba(139,92,246,0.15)]
+        hover:shadow-[0_8px_32px_0_rgba(139,92,246,0.3)]
+        hover:border-white/20
       `}
     >
-      <div className="container mx-auto flex items-center justify-between px-6">
-        <span className="text-4xl font-bold text-black flex text-glow">
+      <div className="flex items-center justify-between px-8">
+        {/* Logo */}
+        <a 
+          href="#hero"
+          className={`font-bold text-primary transition-all duration-300 hover:scale-110 hover:text-shadow-lg
+            ${isScrolled ? "text-2xl" : "text-3xl"}
+          `}
+          style={{
+            textShadow: '0 0 20px rgba(139, 92, 246, 0.5)'
+          }}
+        >
           &lt;Naman/&gt;
-        </span>
+        </a>
 
-        <div className="hidden md:flex space-x-20">
+        {/* Social Icons */}
+        <div className="flex items-center gap-6">
           {navItems.map((item, key) => (
             <a
               key={key}
               href={item.href}
               target={item.target}
               rel={item.rel}
-              className="text-glow text-foreground/80 hover:text-black transition-colors duration-300"
+              className="group relative"
             >
+              {/* Glowing background circle on hover */}
+              <div className="absolute inset-0 -m-2 rounded-full bg-primary/0 group-hover:bg-primary/20 blur-md transition-all duration-300"></div>
+              
+              {/* Icon */}
               <item.icons
-                size={40}
-                className="transition-transform duration-300 hover:scale-130"
+                size={26}
+                className="relative text-foreground/60 group-hover:text-primary transition-all duration-300 
+                  group-hover:scale-125 group-hover:drop-shadow-[0_0_8px_rgba(139,92,246,0.8)]"
               />
             </a>
           ))}
         </div>
       </div>
-    </nav>
 
+      {/* Bottom glass reflection effect */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+    </nav>
   )
 }

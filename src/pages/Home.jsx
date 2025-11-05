@@ -17,7 +17,7 @@ export const Home = () => {
      {!isloaded && <LoadingScreen onComplete={() => setisLoaded(true)}/> }
         <ToggleButton/>
         <StarBackground/>
-        <NavBar/>
+        {isloaded &&< NavBar/>}
         <HeroSection/>
         <AboutMe/>
         <SkillsSection/>
